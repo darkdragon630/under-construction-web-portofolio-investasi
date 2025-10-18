@@ -18,7 +18,7 @@ const updateCountdown = () => {
     document.getElementById("countdown").innerHTML =
       "<p style='grid-column:1/-1'>🚀 Sedang mengalihkan...</p>";
     setTimeout(() => {
-      window.location.replace("https://shoutaverse-capital-group-burhanjepara41.wasmer.app"); // <-- ganti URL rilis
+      window.location.replace("https://shoutaverse-capital-group.wasmer.app"); // <-- ganti URL rilis
     }, 1500);
     return;
   }
