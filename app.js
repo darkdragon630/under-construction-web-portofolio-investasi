@@ -1,15 +1,25 @@
-/* ---------- Hitung Mundur ---------- */
-/* hitung mundur 1 minggu dari detik ini */
-const launchDate = new Date().getTime() + 7 * 24 * 60 * 60 * 1000;
+/* ---------- Hitung Mundur 10 Hari (Tetap) ---------- */
+const LS_KEY = 'countdownTarget_v2';
+let launchDate = localStorage.getItem(LS_KEY);
+
+if (!launchDate) {
+  launchDate = new Date().getTime() + 10 * 24 * 60 * 60 * 1000; // 10 hari ke depan
+  localStorage.setItem(LS_KEY, launchDate);
+}
+launchDate = Number(launchDate);
 
 const updateCountdown = () => {
   const now = new Date().getTime();
   const distance = launchDate - now;
 
   if (distance < 0) {
+    clearInterval(countdownInterval);
+    // Tampilkan pesan sejenak lalu redirect
     document.getElementById("countdown").innerHTML =
-      "<p style='grid-column:1/-1'>🚀 Sudah Rilis!</p>";
-    clearInterval(countdownInterval); // hentikan interval
+      "<p style='grid-column:1/-1'>🚀 Sedang mengalihkan...</p>";
+    setTimeout(() => {
+      window.location.replace("https://shoutaverse-capital-group-burhanjepara41.wasmer.app"); // <-- ganti URL rilis
+    }, 1500);
     return;
   }
 
@@ -24,7 +34,6 @@ const updateCountdown = () => {
   document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
 };
 
-// Jalankan sekarang & setiap detik
 updateCountdown();
 const countdownInterval = setInterval(updateCountdown, 1000);
 
@@ -39,7 +48,7 @@ document.getElementById("notify-form").addEventListener("submit", function (e) {
 
 /* ---------- Partikel Background ---------- */
 const canvas = document.createElement("canvas");
-const ctx    = canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 Object.assign(canvas.style, {
@@ -71,8 +80,7 @@ function drawParticles() {
 }
 drawParticles();
 
-/* ---------- Resize Canvas ---------- */
 window.addEventListener("resize", () => {
-  canvas.width  = window.innerWidth;
+  canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
