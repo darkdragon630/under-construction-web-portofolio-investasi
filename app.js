@@ -3,7 +3,7 @@ const LS_KEY = 'countdownTarget_v2';
 let launchDate = localStorage.getItem(LS_KEY);
 
 if (!launchDate) {
-  launchDate = new Date().getTime() + 10 * 24 * 60 * 60 * 1000; // 10 hari ke depan
+  launchDate = new Date().getTime() + 2 * 60 * 1000; // 2 menit ke depan
   localStorage.setItem(LS_KEY, launchDate);
 }
 launchDate = Number(launchDate);
